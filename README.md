@@ -302,7 +302,7 @@ This submission fulfills all Zama SDK Design Competition requirements:
 | Root-Level Commands | ✅ | All scripts in root |
 | Documentation | ✅ | Complete README & guides |
 | Live Demo | ✅ | Deployed application |
-| Video Demo | ✅ | `demo.mp4` |
+| Video Demo | ✅ | `demo1.mp4 demo2.mp4 demo3.mp4` |
 
 ---
 
@@ -459,7 +459,7 @@ This SDK implements the latest Gateway v2.0 specifications:
 
 A 3-minute video walkthrough is included in this repository:
 
-- **File**: `demo.mp4`
+- **File**: `demo1.mp4 demo2.mp4 demo3.mp4`
 - **Content**:
   - SDK installation and setup
   - Next.js integration walkthrough
@@ -521,7 +521,7 @@ const result = await provider.userDecrypt({
 console.log('Decrypted value:', result.numberValue);
 ```
 
-[**📘 Complete Tutorial →**](./docs/TUTORIAL.md)
+
 
 ---
 
@@ -541,7 +541,7 @@ We welcome contributions! This SDK is open source and community-driven.
 
 ```bash
 # Clone repository
-git clone https://github.com/TyreeBartoletti/fheCropYieldOptimizer.git
+git clone https://github.com/TyreeBartoletti/fhevm-react-template.git
 cd fheCropYieldOptimizer
 
 # Install dependencies
@@ -580,10 +580,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [SDK Documentation](./packages/fhevm-sdk/README.md)
 - [Next.js Template Guide](./examples/nextjs-demo/README.md)
 - [Architecture Overview](./ARCHITECTURE.md)
-- [API Reference](./packages/fhevm-sdk/API.md)
+
 
 ### Links
-- **GitHub**: [https://github.com/TyreeBartoletti/fheCropYieldOptimizer](https://github.com/TyreeBartoletti/fheCropYieldOptimizer)
+- **GitHub**: [https://github.com/TyreeBartoletti/fhevm-react-template](https://github.com/TyreeBartoletti/fhevm-react-template)
 - **Live Demo**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
 - **Zama Docs**: [https://docs.zama.ai/](https://docs.zama.ai/)
 - **fhEVM Docs**: [https://docs.fhevm.zama.ai/](https://docs.fhevm.zama.ai/)
