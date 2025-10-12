@@ -4,7 +4,7 @@
 >
 > Built for the Zama fhEVM SDK Design Competition
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 [![Next.js Template](https://img.shields.io/badge/Next.js-14-black)](./examples/nextjs-demo/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Network](https://img.shields.io/badge/network-Sepolia-purple)](https://sepolia.etherscan.io/)
@@ -200,7 +200,7 @@ npm run dev:nextjs
 
 Real-world application showing privacy-preserving agricultural collaboration:
 
-- **Live Demo**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+- **Live Demo**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 - **Use Case**: Multiple farms collaborate on encrypted yield optimization
 - **Contract**: `0xf2301736A15a5152401E968cB8d995c0F508f568` on Sepolia
 - **Features**: Farm registration, encrypted data submission, FHE computation
@@ -428,7 +428,7 @@ This SDK implements the latest Gateway v2.0 specifications:
 
 ### Live Deployments
 
-- **Demo Application**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+- **Demo Application**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 - **Smart Contract**: [`0xf2301736A15a5152401E968cB8d995c0F508f568`](https://sepolia.etherscan.io/address/0xf2301736A15a5152401E968cB8d995c0F508f568)
 - **Network**: Ethereum Sepolia Testnet
 - **Gateway**: `0x33347831500F1e73f102414fAf8fD6b494F06a10`
@@ -542,7 +542,7 @@ We welcome contributions! This SDK is open source and community-driven.
 ```bash
 # Clone repository
 git clone https://github.com/TyreeBartoletti/fhevm-react-template.git
-cd fheCropYieldOptimizer
+cd FHECropYieldOptimizer
 
 # Install dependencies
 npm install
@@ -584,7 +584,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Links
 - **GitHub**: [https://github.com/TyreeBartoletti/fhevm-react-template](https://github.com/TyreeBartoletti/fhevm-react-template)
-- **Live Demo**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+- **Live Demo**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 - **Zama Docs**: [https://docs.zama.ai/](https://docs.zama.ai/)
 - **fhEVM Docs**: [https://docs.fhevm.zama.ai/](https://docs.fhevm.zama.ai/)
 
