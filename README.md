@@ -55,6 +55,87 @@
 
 ---
 
+```typescript
+// Vanilla JS/TS
+import { createProvider } from '@fhevm/sdk';
+const provider = createProvider();
+await provider.initialize({ chainId: 11155111, gatewayAddress: '0x...' });
+const encrypted = await provider.encryptUint32(42);
+
+// React
+import { FHEProviderComponent, useEncryptUint32 } from '@fhevm/sdk/react';
+const { encrypt } = useEncryptUint32();
+const encrypted = await encrypt(42);
+```
+
+[**→ SDK Documentation**](./packages/fhevm-sdk/README.md)
+
+### 2. **Example Application: Confidential Agricultural Platform**
+
+A real-world demonstration showing how to use the SDK to build a privacy-preserving dApp:
+
+- **Use Case**: Multiple farms collaborate on encrypted yield optimization
+- **Features**: Farm registration, encrypted data submission, collaborative analysis, private recommendations
+- **Smart Contract**: Deployed on Sepolia at `0xf2301736A15a5152401E968cB8d995c0F508f568`
+- **Live Demo**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+
+## 🚀 Quick Start (For Developers)
+
+### Install All Packages from Root
+
+```bash
+npm install
+```
+
+### Build the SDK
+
+```bash
+npm run build:sdk
+```
+
+### Compile & Deploy Smart Contracts from Root
+
+```bash
+# Compile Solidity contracts and generate ABI
+npm run build:contracts
+
+# Deploy to Sepolia
+npm run deploy
+```
+
+### Start the Example Frontend from Root
+
+```bash
+npm start
+```
+
+The demo will be available at `http://localhost:3000`
+
+## 🎯 Competition Requirements Met
+
+✅ **Universal SDK Package**: `packages/fhevm-sdk` can be imported into any dApp
+✅ **Initialization Utilities**: Simple provider setup with configuration
+✅ **Encryption/Decryption Flow**: Full support for encrypt, userDecrypt, and publicDecrypt
+✅ **EIP-712 Signatures**: Used for secure decryption authorization
+✅ **Wagmi-like API**: Modular hooks and adapters for React
+✅ **Reusable & Extensible**: Clean architecture, well-documented
+✅ **Monorepo Structure**: Workspaces for SDK and examples
+✅ **Root-Level Operations**: Install, build, deploy all from root directory
+✅ **Example dApp**: Complete agricultural platform demonstrating SDK usage
+✅ **Live Deployment**: Accessible demo with deployed contracts
+
+## 📖 Example Application: Confidential Crop Yield Optimizer
+
+**Confidential Agricultural Yield Optimization** - An innovative agricultural data analysis platform that enables multiple farms to share planting data for encrypted computation, obtaining optimal planting recommendations without exposing their respective commercial secrets.
+
+This breakthrough platform allows agricultural cooperatives to collaborate on data-driven decision making while maintaining complete privacy of their proprietary farming data through advanced Fully Homomorphic Encryption (FHE) technology.
+
+## 🎥 Demo
+
+**Live Application**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+
+**Video Demonstration**: demo1.mp4 demo2.mp4 demo3.mp4 
+
 ## 🚀 Quick Start
 
 ### Installation
