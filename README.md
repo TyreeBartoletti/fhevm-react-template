@@ -175,41 +175,112 @@ All React hooks follow the Wagmi pattern for consistency:
 
 ## 🎨 Examples & Templates
 
-### 1. Next.js Template (Required for Competition) ✅
+This repository includes two comprehensive examples demonstrating different integration approaches:
 
-Complete Next.js 14 application demonstrating all SDK features:
+### 1. Next.js Template (Framework Integration) ✅
+
+Complete Next.js 14 application with full SDK integration:
 
 - **Location**: [`examples/nextjs-demo/`](./examples/nextjs-demo/)
+- **Integration Type**: Full SDK with React Hooks
 - **Features**:
-  - App Router with React Server & Client Components
-  - All encryption/decryption examples
-  - MetaMask wallet integration
-  - Professional UI with loading states
-  - Full TypeScript support
-  - Responsive design
+  - ✅ FHEProviderComponent with Context API
+  - ✅ All encryption hooks (useBool, useUint8/16/32)
+  - ✅ Decryption with useDecrypt() hook
+  - ✅ App Router with Server & Client Components
+  - ✅ MetaMask wallet integration
+  - ✅ TypeScript type safety
+  - ✅ Loading states & error handling
+  - ✅ Professional responsive UI
 
-**Start the demo:**
+**Quick Start:**
 ```bash
+# From monorepo root
 npm run dev:nextjs
+# Or from examples/nextjs-demo
+cd examples/nextjs-demo && npm run dev
 # Opens at http://localhost:3000
 ```
 
-[**📖 Next.js Template Documentation →**](./examples/nextjs-demo/README.md)
+**SDK Integration Highlights:**
+```tsx
+// Provider setup in layout.tsx
+<FHEProviderComponent config={fheConfig} autoInitialize>
+  {children}
+</FHEProviderComponent>
 
-### 2. Vanilla HTML/JS Demo (Live)
+// Using hooks in components
+const { encrypt, isEncrypting } = useEncryptUint32();
+const { decrypt, result } = useDecrypt();
+```
 
-Real-world application showing privacy-preserving agricultural collaboration:
+[**📖 Next.js Template Full Documentation →**](./examples/nextjs-demo/README.md)
 
+---
+
+### 2. Vanilla HTML/JS Demo (Live Production App) 🌐
+
+Real-world agricultural data collaboration platform:
+
+- **Location**: [`examples/fheCropYieldOptimizer/`](./examples/fheCropYieldOptimizer/)
 - **Live Demo**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
-- **Use Case**: Multiple farms collaborate on encrypted yield optimization
+- **Integration Type**: Vanilla JS with optional SDK integration guide
+- **Use Case**: Privacy-preserving multi-farm yield optimization
 - **Contract**: `0xf2301736A15a5152401E968cB8d995c0F508f568` on Sepolia
-- **Features**: Farm registration, encrypted data submission, FHE computation
 
-**Start locally:**
+**Key Features:**
+- 🏭 Farm registration system
+- 📊 Encrypted agricultural data submission
+- 🤝 Multi-party collaborative analysis
+- 💡 Personalized optimization recommendations
+- 🔒 Complete data privacy with FHE
+- 📱 Responsive design for mobile & desktop
+
+**Start Locally:**
 ```bash
+cd examples/fheCropYieldOptimizer
+npm install
 npm start
 # Opens at http://localhost:3000
 ```
+
+**SDK Integration Guide:**
+The example includes commented code showing how to integrate @fhevm/sdk:
+```javascript
+// Initialize SDK
+const fheProvider = createProvider();
+await fheProvider.initialize({
+  chainId: 11155111,
+  gatewayAddress: '0x33347831500F1e73f102414fAf8fD6b494F06a10'
+});
+
+// Encrypt data
+const encrypted = await fheProvider.encryptUint32(value);
+await contract.submitData(encrypted.data);
+```
+
+[**📖 FHE Crop Optimizer Documentation →**](./examples/fheCropYieldOptimizer/README.md)
+
+---
+
+### Comparison Table
+
+| Feature | Next.js Demo | Crop Yield Optimizer |
+|---------|-------------|---------------------|
+| **Framework** | Next.js 14 | Vanilla HTML/JS |
+| **SDK Integration** | Full (Hooks) | Optional (Guide provided) |
+| **TypeScript** | ✅ Full | ❌ JavaScript |
+| **Live Deployment** | Development | ✅ [Production](https://tyreebartoletti.github.io/FHECropYieldOptimizer/) |
+| **Use Case** | SDK Feature Demo | Real-world Application |
+| **Complexity** | Moderate | Simple |
+| **Best For** | React developers | Quick start, vanilla JS |
+| **Smart Contract** | Demo contract | Production contract |
+
+### Which Example Should I Use?
+
+- **Choose Next.js Demo** if you're building a React/Next.js app and want to use SDK hooks
+- **Choose Crop Yield Optimizer** if you need a vanilla JS example or real-world use case inspiration
+- **Use Both** to see different integration patterns and choose what fits your stack
 
 ---
 
@@ -218,7 +289,7 @@ npm start
 This project uses npm workspaces for efficient development:
 
 ```
-fhevm-sdk-monorepo/
+fhevm-react-template/
 ├── packages/
 │   └── fhevm-sdk/              # Core SDK package
 │       ├── src/
@@ -229,21 +300,44 @@ fhevm-sdk-monorepo/
 │       └── README.md           # SDK documentation
 │
 ├── examples/
-│   └── nextjs-demo/            # Next.js 14 template (Required)
-│       ├── app/                # App Router structure
+│   ├── nextjs-demo/            # Next.js 14 template with full SDK
+│   │   ├── app/
+│   │   │   ├── layout.tsx      # FHE Provider setup
+│   │   │   ├── page.tsx        # Demo components
+│   │   │   └── globals.css     # Styling
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── README.md           # Next.js integration guide
+│   │
+│   └── fheCropYieldOptimizer/  # Vanilla JS production example
+│       ├── contracts/
+│       │   └── CropYieldOptimizer.sol
+│       ├── index.html          # Main application
+│       ├── deploy.js           # Contract deployment
+│       ├── hardhat.config.js   # Hardhat configuration
 │       ├── package.json
-│       └── README.md
+│       └── README.md           # App documentation
 │
-├── contracts/                  # Smart contracts
+├── contracts/                  # Additional smart contracts
 │   └── ConfidentialYieldOptimizer.sol
 │
 ├── scripts/                    # Deployment scripts
 │   └── deploy.js
 │
 ├── package.json                # Root workspace config
-├── README.md                   # This file
-└── demo.mp4                    # Video demonstration
+├── README.md                   # This file (main documentation)
+├── demo1.mp4                   # Video demonstrations
+├── demo2.mp4
+└── demo3.mp4
 ```
+
+### Directory Guide
+
+- **`packages/fhevm-sdk/`** - Universal TypeScript SDK (core package)
+- **`examples/nextjs-demo/`** - Next.js integration with React hooks
+- **`examples/fheCropYieldOptimizer/`** - Vanilla JS production application
+- **`contracts/`** - Solidity smart contracts
+- **`scripts/`** - Build and deployment utilities
 
 ---
 
@@ -252,6 +346,7 @@ fhevm-sdk-monorepo/
 ### Install All Dependencies
 
 ```bash
+# Install all packages including SDK and examples
 npm install
 ```
 
@@ -263,16 +358,48 @@ npm run build:sdk
 
 This compiles both core and React packages.
 
+### Run Examples
+
+#### Next.js Demo
+```bash
+# From root
+npm run dev:nextjs
+
+# Or from examples directory
+cd examples/nextjs-demo
+npm install
+npm run dev
+```
+Opens at http://localhost:3000
+
+#### FHE Crop Yield Optimizer
+```bash
+# Navigate to example directory
+cd examples/fheCropYieldOptimizer
+npm install
+npm start
+```
+Opens at http://localhost:3000
+
 ### Compile Contracts
 
 ```bash
 npm run build:contracts
+
+# Or compile specific example contracts
+cd examples/fheCropYieldOptimizer
+npx hardhat compile
 ```
 
 ### Deploy Contracts
 
 ```bash
+# Deploy main contracts
 npm run deploy
+
+# Or deploy example contracts
+cd examples/fheCropYieldOptimizer
+npx hardhat run deploy.js --network sepolia
 ```
 
 ### Run Tests
@@ -541,8 +668,8 @@ We welcome contributions! This SDK is open source and community-driven.
 
 ```bash
 # Clone repository
-git clone https://github.com/TyreeBartoletti/fhevm-react-template.git
-cd FHECropYieldOptimizer
+git clone <your-repository-url>
+cd fhevm-react-template
 
 # Install dependencies
 npm install
@@ -583,10 +710,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 ### Links
-- **GitHub**: [https://github.com/TyreeBartoletti/fhevm-react-template](https://github.com/TyreeBartoletti/fhevm-react-template)
 - **Live Demo**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 - **Zama Docs**: [https://docs.zama.ai/](https://docs.zama.ai/)
 - **fhEVM Docs**: [https://docs.fhevm.zama.ai/](https://docs.fhevm.zama.ai/)
+- **EIP-712 Specification**: [https://eips.ethereum.org/EIPS/eip-712](https://eips.ethereum.org/EIPS/eip-712)
 
 ### Community
 - Open an issue on GitHub
