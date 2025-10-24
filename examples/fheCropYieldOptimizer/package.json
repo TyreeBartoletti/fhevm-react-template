@@ -1,0 +1,39 @@
+{
+  "name": "confidential-crop-yield-optimizer",
+  "version": "1.0.0",
+  "description": "Agricultural Data Collaboration Platform with Fully Homomorphic Encryption",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build step needed for static files'",
+    "start": "npx http-server . -p 3000",
+    "deploy": "hardhat run deploy.js --network sepolia"
+  },
+  "keywords": [
+    "agriculture",
+    "fhe",
+    "blockchain",
+    "privacy",
+    "optimization",
+    "zama",
+    "smart-contracts"
+  ],
+  "author": "Agricultural Technology Solutions",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/confidential-crop-yield-optimizer.git"
+  },
+  "homepage": "https://your-username.github.io/confidential-crop-yield-optimizer",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "@fhevm/solidity": "^0.9.0-1",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.19.5"
+  },
+  "dependencies": {
+    "@zama-fhe/oracle-solidity": "^0.2.0"
+  }
+}

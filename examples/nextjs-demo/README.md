@@ -1,38 +1,53 @@
 # Next.js fhEVM SDK Demo
 
-> Next.js 14 application demonstrating @fhevm/sdk integration with App Router
+> Comprehensive Next.js 14 application demonstrating @fhevm/sdk integration with production-ready architecture
 
-This example demonstrates how to integrate the fhEVM SDK into a Next.js application using:
+This example showcases a complete, production-ready implementation of FHE in Next.js featuring:
 - ✅ Next.js 14 with App Router
 - ✅ React Server Components and Client Components
-- ✅ TypeScript for type safety
-- ✅ @fhevm/sdk React hooks
+- ✅ Full TypeScript implementation
+- ✅ Custom FHE hooks and providers
+- ✅ RESTful API routes for FHE operations
+- ✅ Reusable UI components
+- ✅ Real-world use case examples
+- ✅ Comprehensive error handling
 - ✅ MetaMask wallet integration
-- ✅ Full FHE encryption/decryption workflow
 
 ## Features Demonstrated
 
-### SDK Integration
-- FHEProviderComponent wrapping the entire app
-- Auto-initialization of FHE instance
-- Context-based state management
+### 🏗️ Architecture
+- **Modular structure**: Organized by feature (components, lib, hooks, types, api)
+- **Custom FHE Provider**: Context-based state management with auto-initialization
+- **TypeScript throughout**: Full type safety and IntelliSense support
+- **API Routes**: RESTful endpoints for FHE operations
 
-### Encryption Examples
-- Boolean encryption (ebool)
-- Uint8 encryption (euint8)
-- Uint16 encryption (euint16)
-- Uint32 encryption (euint32)
+### 🔐 FHE Operations
+- **Encryption**: All FHE types (bool, uint8/16/32/64/128/256, address)
+- **Decryption**: EIP-712 signature-based with wallet integration
+- **Validation**: Input validation for all encryption types
+- **Error Handling**: Comprehensive error states and messages
 
-### Decryption Examples
-- EIP-712 signature-based decryption
-- User-friendly wallet prompts
-- Type-safe result handling
+### 🎨 UI Components
+- **Button**: Variants (primary, secondary, outline, danger) with loading states
+- **Input**: Form inputs with labels, errors, and helper text
+- **Card**: Container components with titles and descriptions
 
-### Developer Experience
-- Loading states for all operations
-- Error handling with user feedback
-- TypeScript autocomplete
-- Wagmi-like familiar API
+### 🧪 Custom Hooks
+- **useFHE**: Main hook for FHE initialization and operations
+- **useEncryption**: Specialized encryption operations with state management
+- **useFHEContext**: Access FHE context from any component
+
+### 📦 API Endpoints
+- `POST /api/fhe/encrypt` - Encrypt values (demo endpoint)
+- `POST /api/fhe/decrypt` - Decrypt ciphertexts with EIP-712
+- `POST /api/fhe/compute` - Homomorphic computations
+- `POST /api/keys` - Key generation and management
+- `GET /api/fhe` - API information and capabilities
+
+### 💼 Use Case Examples
+- **Banking Demo**: Private financial transactions with encrypted amounts
+- **Medical Example**: Healthcare data privacy (structure ready)
+- More examples can be easily added following the pattern
 
 ## Quick Start
 
@@ -77,15 +92,52 @@ npm start
 
 ```
 nextjs-demo/
-├── app/
-│   ├── layout.tsx          # Root layout with FHEProviderComponent
-│   ├── page.tsx            # Main demo page with SDK examples
-│   └── globals.css         # Global styles
-├── package.json            # Dependencies and scripts
-├── next.config.js          # Next.js configuration
-├── tsconfig.json           # TypeScript configuration
-└── README.md               # This file
+├── src/
+│   ├── app/                     # Next.js App Router
+│   │   ├── layout.tsx           # Root layout with FHE provider
+│   │   ├── page.tsx             # Homepage with demos
+│   │   ├── globals.css          # Global styles
+│   │   └── api/                 # API routes
+│   │       ├── fhe/
+│   │       │   ├── route.ts         # FHE info endpoint
+│   │       │   ├── encrypt/route.ts # Encryption API
+│   │       │   ├── decrypt/route.ts # Decryption API
+│   │       │   └── compute/route.ts # Computation API
+│   │       └── keys/route.ts    # Key management
+│   │
+│   ├── components/              # React components
+│   │   ├── ui/                  # Base UI components
+│   │   │   ├── Button.tsx
+│   │   │   ├── Input.tsx
+│   │   │   └── Card.tsx
+│   │   ├── fhe/                 # FHE components
+│   │   │   ├── FHEProvider.tsx
+│   │   │   └── EncryptionDemo.tsx
+│   │   └── examples/            # Use cases
+│   │       └── BankingExample.tsx
+│   │
+│   ├── lib/                     # Utilities
+│   │   ├── fhe/
+│   │   │   └── client.ts        # FHE client operations
+│   │   └── utils/
+│   │       └── validation.ts    # Input validation
+│   │
+│   ├── hooks/                   # Custom hooks
+│   │   ├── useFHE.ts
+│   │   └── useEncryption.ts
+│   │
+│   └── types/                   # TypeScript types
+│       ├── fhe.ts
+│       └── api.ts
+│
+├── package.json
+├── next.config.js
+├── tsconfig.json
+├── README.md                    # This file
+└── PROJECT_STRUCTURE.md         # Detailed architecture docs
 ```
+
+For detailed documentation on each component, see [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md).
 
 ## Key Implementation Details
 
@@ -213,8 +265,42 @@ webpack: (config) => {
 }
 ```
 
+## API Usage Examples
+
+### Encrypt via API
+```typescript
+const response = await fetch('/api/fhe/encrypt', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ value: 42, type: 'uint32' }),
+});
+const { data } = await response.json();
+```
+
+### Decrypt via API
+```typescript
+const response = await fetch('/api/fhe/decrypt', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    handle: '0x...',
+    contractAddress: '0x...',
+    signature: '0x...',
+  }),
+});
+const { data } = await response.json();
+```
+
+### Get API Info
+```typescript
+const response = await fetch('/api/fhe');
+const info = await response.json();
+console.log('Supported operations:', info.data.supportedOperations);
+```
+
 ## Learning Resources
 
+- [Project Structure Documentation](./PROJECT_STRUCTURE.md)
 - [fhEVM SDK Documentation](../../packages/fhevm-sdk/README.md)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Zama fhEVM Docs](https://docs.zama.ai/)
