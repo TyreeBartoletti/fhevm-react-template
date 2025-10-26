@@ -77,7 +77,7 @@ A real-world demonstration showing how to use the SDK to build a privacy-preserv
 - **Use Case**: Multiple farms collaborate on encrypted yield optimization
 - **Features**: Farm registration, encrypted data submission, collaborative analysis, private recommendations
 - **Smart Contract**: Deployed on Sepolia at `0xf2301736A15a5152401E968cB8d995c0F508f568`
-- **Live Demo**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+- **Live Demo**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 
 
 ## 📖 Example Application: Confidential Crop Yield Optimizer
@@ -88,7 +88,7 @@ This breakthrough platform allows agricultural cooperatives to collaborate on da
 
 ## 🎥 Demo
 
-**Live Application**: [https://tyreebartoletti.github.io/fheCropYieldOptimizer/](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
+**Live Application**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 
 **Video Demonstration**: demo1.mp4 demo2.mp4 demo3.mp4 
 
