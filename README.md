@@ -221,14 +221,52 @@ Complete Next.js 14 application with full SDK integration:
 - **Location**: [`examples/nextjs-demo/`](./examples/nextjs-demo/)
 - **Integration Type**: Full SDK with React Hooks
 - **Features**:
-  - ✅ FHEProviderComponent with Context API
+  - ✅ FHE SDK fully integrated with React Context
   - ✅ All encryption hooks (useBool, useUint8/16/32)
   - ✅ Decryption with useDecrypt() hook
   - ✅ App Router with Server & Client Components
+  - ✅ Homomorphic computation demonstrations
+  - ✅ Real-world examples (Banking, Medical)
+  - ✅ Key management interface
   - ✅ MetaMask wallet integration
   - ✅ TypeScript type safety
   - ✅ Loading states & error handling
   - ✅ Professional responsive UI
+
+**Project Structure:**
+```
+nextjs-demo/
+├── src/
+│   ├── app/                      # Next.js App Router
+│   │   ├── layout.tsx            # Root layout with FHE setup
+│   │   ├── page.tsx              # Main demo page
+│   │   ├── globals.css           # Global styles
+│   │   └── api/                  # API routes for FHE operations
+│   ├── components/
+│   │   ├── fhe/                  # FHE-specific components
+│   │   │   ├── FHEProvider.tsx   # FHE Context Provider
+│   │   │   ├── EncryptionDemo.tsx
+│   │   │   ├── ComputationDemo.tsx
+│   │   │   └── KeyManager.tsx
+│   │   ├── examples/             # Real-world use cases
+│   │   │   ├── BankingExample.tsx
+│   │   │   └── MedicalExample.tsx
+│   │   └── ui/                   # Reusable UI components
+│   ├── lib/
+│   │   ├── fhe/                  # FHE integration library
+│   │   │   ├── client.ts         # Client-side FHE operations
+│   │   │   ├── server.ts         # Server-side FHE operations
+│   │   │   ├── keys.ts           # Key management utilities
+│   │   │   └── types.ts          # FHE type definitions
+│   │   └── utils/                # Utility functions
+│   │       ├── validation.ts
+│   │       └── security.ts
+│   ├── hooks/                    # Custom React hooks
+│   │   ├── useFHE.ts             # Main FHE hook
+│   │   ├── useEncryption.ts      # Encryption hook
+│   │   └── useComputation.ts     # Computation hook
+│   └── types/                    # TypeScript definitions
+```
 
 **Quick Start:**
 ```bash
@@ -241,15 +279,34 @@ cd examples/nextjs-demo && npm run dev
 
 **SDK Integration Highlights:**
 ```tsx
-// Provider setup in layout.tsx
-<FHEProviderComponent config={fheConfig} autoInitialize>
-  {children}
-</FHEProviderComponent>
+// Initialize FHE in your app
+import { useFHE } from '@/hooks/useFHE';
 
-// Using hooks in components
-const { encrypt, isEncrypting } = useEncryptUint32();
-const { decrypt, result } = useDecrypt();
+const { initialize, isInitialized } = useFHE();
+
+useEffect(() => {
+  initialize({
+    chainId: 11155111,
+    gatewayAddress: '0x33347831500F1e73f102414fAf8fD6b494F06a10'
+  });
+}, []);
+
+// Encrypt values with SDK
+import { encryptValue } from '@/lib/fhe/client';
+
+const encrypted = await encryptValue(42, 'uint32');
+
+// Use in components with hooks
+const { encrypt, isEncrypting } = useEncryption();
+const encrypted = await encrypt(42, 'uint32');
 ```
+
+**Demo Features:**
+- 🔒 **Encryption Demo**: Interactive encryption of different data types
+- 🔢 **Computation Demo**: Homomorphic operations (add, subtract, multiply, compare)
+- 🏦 **Banking Example**: Private financial transactions
+- ⚕️ **Medical Example**: Secure patient data management
+- 🔑 **Key Manager**: FHE key information and management
 
 [**📖 Next.js Template Full Documentation →**](./examples/nextjs-demo/README.md)
 
@@ -330,21 +387,38 @@ fhevm-react-template/
 ├── packages/
 │   └── fhevm-sdk/              # Core SDK package
 │       ├── src/
-│       │   ├── core/           # Framework-agnostic core
-│       │   ├── react/          # React hooks & providers
-│       │   └── types/          # TypeScript definitions
+│       │   ├── provider.ts     # Core FHE provider
+│       │   ├── encryption.ts   # Encryption utilities
+│       │   ├── decryption.ts   # Decryption utilities
+│       │   ├── utils.ts        # Helper functions
+│       │   ├── types.ts        # TypeScript definitions
+│       │   ├── index.ts        # Main exports
+│       │   └── react/          # React hooks & providers
+│       │       ├── context.tsx # FHE Context
+│       │       ├── hooks.ts    # React hooks
+│       │       └── index.ts    # React exports
 │       ├── package.json
 │       └── README.md           # SDK documentation
 │
 ├── examples/
 │   ├── nextjs-demo/            # Next.js 14 template with full SDK
-│   │   ├── app/
-│   │   │   ├── layout.tsx      # FHE Provider setup
-│   │   │   ├── page.tsx        # Demo components
-│   │   │   └── globals.css     # Styling
+│   │   ├── src/
+│   │   │   ├── app/            # Next.js App Router
+│   │   │   │   ├── layout.tsx  # Root layout
+│   │   │   │   ├── page.tsx    # Main page
+│   │   │   │   ├── globals.css # Styles
+│   │   │   │   └── api/        # API routes
+│   │   │   ├── components/     # React components
+│   │   │   │   ├── fhe/        # FHE components
+│   │   │   │   ├── examples/   # Use case examples
+│   │   │   │   └── ui/         # UI components
+│   │   │   ├── lib/            # Libraries
+│   │   │   │   ├── fhe/        # FHE integration
+│   │   │   │   └── utils/      # Utilities
+│   │   │   ├── hooks/          # Custom hooks
+│   │   │   └── types/          # Type definitions
 │   │   ├── package.json
-│   │   ├── tsconfig.json
-│   │   └── README.md           # Next.js integration guide
+│   │   └── README.md           # Next.js guide
 │   │
 │   └── fheCropYieldOptimizer/  # Vanilla JS production example
 │       ├── contracts/
@@ -363,6 +437,7 @@ fhevm-react-template/
 │
 ├── package.json                # Root workspace config
 ├── README.md                   # This file (main documentation)
+├── ARCHITECTURE.md             # Architecture documentation
 ├── demo1.mp4                   # Video demonstrations
 ├── demo2.mp4
 └── demo3.mp4
