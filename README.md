@@ -70,10 +70,6 @@ const encrypted = await encrypt(42);
 
 [**→ SDK Documentation**](./packages/fhevm-sdk/README.md)
 
-### 2. **Example Application: Confidential Agricultural Platform**
-
-
-
 ## 📖 Example Application: Confidential Crop Yield Optimizer
 
 **Confidential Agricultural Yield Optimization** - An innovative agricultural data analysis platform that enables multiple farms to share planting data for encrypted computation, obtaining optimal planting recommendations without exposing their respective commercial secrets.
