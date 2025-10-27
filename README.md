@@ -72,12 +72,6 @@ const encrypted = await encrypt(42);
 
 ### 2. **Example Application: Confidential Agricultural Platform**
 
-A real-world demonstration showing how to use the SDK to build a privacy-preserving dApp:
-
-- **Use Case**: Multiple farms collaborate on encrypted yield optimization
-- **Features**: Farm registration, encrypted data submission, collaborative analysis, private recommendations
-- **Smart Contract**: Deployed on Sepolia at `0xf2301736A15a5152401E968cB8d995c0F508f568`
-- **Live Demo**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
 
 
 ## 📖 Example Application: Confidential Crop Yield Optimizer
