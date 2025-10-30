@@ -43,7 +43,7 @@ All created files include full SDK integration:
 
 ### 3. Structure Alignment
 
-The examples now follow the structure defined in next.md:
+The examples now follow the specified structure:
 
 ```
 src/
@@ -95,7 +95,7 @@ Updated `README.md` to reflect:
 
 ### 5. Compliance Check ✅
 
-Verified against `D:\bounty.md` requirements:
+Verified against the requirements:
 - ✅ Core SDK package exists (`packages/fhevm-sdk/`)
 - ✅ Next.js template complete (`examples/nextjs-demo/`)
 - ✅ All required files present

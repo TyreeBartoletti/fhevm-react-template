@@ -68,7 +68,7 @@ const { encrypt } = useEncryptUint32();
 const encrypted = await encrypt(42);
 ```
 
-[**→ SDK Documentation**](./packages/fhevm-sdk/README.md)
+[**→ SDK Documentation**](./packages/fhevm-sdk/README.md) | [**→ Quick Start Guide**](./docs/QUICK_START.md) | [**→ API Reference**](./docs/API.md)
 
 ## 📖 Example Application: Confidential Crop Yield Optimizer
 
@@ -206,14 +206,16 @@ This repository includes two comprehensive examples demonstrating different inte
 
 ### 1. Next.js Template (Framework Integration) ✅
 
-Complete Next.js 14 application with full SDK integration:
+Complete Next.js 14 application with full SDK integration using @fhevm/sdk React hooks:
 
 - **Location**: [`examples/nextjs-demo/`](./examples/nextjs-demo/)
-- **Integration Type**: Full SDK with React Hooks
+- **Integration Type**: Full SDK with @fhevm/sdk React Hooks
+- **SDK Usage**: Direct integration of `FHEProviderComponent`, `useEncryptUint32()`, `useEncryptBool()`, etc.
 - **Features**:
-  - ✅ FHE SDK fully integrated with React Context
-  - ✅ All encryption hooks (useBool, useUint8/16/32)
-  - ✅ Decryption with useDecrypt() hook
+  - ✅ Uses `@fhevm/sdk/react` FHEProviderComponent
+  - ✅ SDK hooks: `useEncryptBool()`, `useEncryptUint8/16/32()`
+  - ✅ Direct SDK integration without custom wrappers
+  - ✅ Decryption with `useDecrypt()` hook from SDK
   - ✅ App Router with Server & Client Components
   - ✅ Homomorphic computation demonstrations
   - ✅ Real-world examples (Banking, Medical)
@@ -269,26 +271,33 @@ cd examples/nextjs-demo && npm run dev
 
 **SDK Integration Highlights:**
 ```tsx
-// Initialize FHE in your app
-import { useFHE } from '@/hooks/useFHE';
+// Wrap app with SDK provider
+import { FHEProviderComponent } from '@fhevm/sdk/react';
 
-const { initialize, isInitialized } = useFHE();
-
-useEffect(() => {
-  initialize({
+<FHEProviderComponent
+  config={{
     chainId: 11155111,
     gatewayAddress: '0x33347831500F1e73f102414fAf8fD6b494F06a10'
-  });
-}, []);
+  }}
+  autoInitialize
+>
+  <YourApp />
+</FHEProviderComponent>
 
-// Encrypt values with SDK
-import { encryptValue } from '@/lib/fhe/client';
+// Use SDK hooks directly in components
+import { useEncryptUint32 } from '@fhevm/sdk/react';
 
-const encrypted = await encryptValue(42, 'uint32');
+const { encrypt, isEncrypting } = useEncryptUint32();
+const encrypted = await encrypt(42);
 
-// Use in components with hooks
-const { encrypt, isEncrypting } = useEncryption();
-const encrypted = await encrypt(42, 'uint32');
+// Component example
+function EncryptionDemo() {
+  const boolEncrypt = useEncryptBool();
+  const uint32Encrypt = useEncryptUint32();
+
+  const result = await uint32Encrypt.encrypt(42);
+  // result.data contains encrypted ciphertext
+}
 ```
 
 **Demo Features:**
@@ -328,9 +337,17 @@ npm start
 # Opens at http://localhost:3000
 ```
 
-**SDK Integration Guide:**
-The example includes commented code showing how to integrate @fhevm/sdk:
+**SDK Integration:**
+A comprehensive SDK integration guide is provided:
+- 📘 [**SDK Integration Guide**](./examples/fheCropYieldOptimizer/SDK_INTEGRATION_GUIDE.md) - Complete step-by-step instructions
+- ✅ Package.json includes `@fhevm/sdk` dependency
+- 💡 Example code for encryption and decryption
+- 🔧 Smart contract compatibility guide
+
+**Quick SDK Integration Example:**
 ```javascript
+import { createProvider } from '@fhevm/sdk';
+
 // Initialize SDK
 const fheProvider = createProvider();
 await fheProvider.initialize({
@@ -338,12 +355,27 @@ await fheProvider.initialize({
   gatewayAddress: '0x33347831500F1e73f102414fAf8fD6b494F06a10'
 });
 
-// Encrypt data
-const encrypted = await fheProvider.encryptUint32(value);
-await contract.submitData(encrypted.data);
+// Encrypt agricultural data
+const encryptedSoil = await fheProvider.encryptUint32(soilQuality);
+const encryptedWater = await fheProvider.encryptUint32(waterUsage);
+const encryptedYield = await fheProvider.encryptUint32(yieldAmount);
+
+// Submit encrypted data to contract
+await contract.submitFarmData(
+  encryptedSoil.data,
+  encryptedWater.data,
+  encryptedYield.data
+);
+
+// Decrypt recommendations with EIP-712 signature
+const result = await fheProvider.userDecrypt({
+  handle: recommendationHandle,
+  contractAddress: CONTRACT_ADDRESS,
+  signer: signer
+});
 ```
 
-[**📖 FHE Crop Optimizer Documentation →**](./examples/fheCropYieldOptimizer/README.md)
+[**📖 FHE Crop Optimizer Documentation →**](./examples/fheCropYieldOptimizer/README.md) | [**🔧 SDK Integration Guide →**](./examples/fheCropYieldOptimizer/SDK_INTEGRATION_GUIDE.md)
 
 ---
 
@@ -352,12 +384,14 @@ await contract.submitData(encrypted.data);
 | Feature | Next.js Demo | Crop Yield Optimizer |
 |---------|-------------|---------------------|
 | **Framework** | Next.js 14 | Vanilla HTML/JS |
-| **SDK Integration** | Full (Hooks) | Optional (Guide provided) |
+| **SDK Integration** | ✅ Full (Direct SDK hooks) | ✅ Guide + Package ready |
+| **SDK Usage** | `@fhevm/sdk/react` hooks | Vanilla `@fhevm/sdk` |
 | **TypeScript** | ✅ Full | ❌ JavaScript |
 | **Live Deployment** | Development | ✅ [Production](https://tyreebartoletti.github.io/FHECropYieldOptimizer/) |
+| **Integration Docs** | In code | [SDK_INTEGRATION_GUIDE.md](./examples/fheCropYieldOptimizer/SDK_INTEGRATION_GUIDE.md) |
 | **Use Case** | SDK Feature Demo | Real-world Application |
 | **Complexity** | Moderate | Simple |
-| **Best For** | React developers | Quick start, vanilla JS |
+| **Best For** | React developers | Vanilla JS developers |
 | **Smart Contract** | Demo contract | Production contract |
 
 ### Which Example Should I Use?
@@ -425,6 +459,11 @@ fhevm-react-template/
 ├── scripts/                    # Deployment scripts
 │   └── deploy.js
 │
+├── docs/                       # Documentation
+│   ├── README.md              # Documentation index
+│   ├── QUICK_START.md         # Quick start guide
+│   └── API.md                 # API reference
+│
 ├── package.json                # Root workspace config
 ├── README.md                   # This file (main documentation)
 ├── ARCHITECTURE.md             # Architecture documentation
@@ -440,6 +479,7 @@ fhevm-react-template/
 - **`examples/fheCropYieldOptimizer/`** - Vanilla JS production application
 - **`contracts/`** - Solidity smart contracts
 - **`scripts/`** - Build and deployment utilities
+- **`docs/`** - Complete documentation (Quick Start, API Reference)
 
 ---
 
@@ -806,9 +846,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support & Resources
 
 ### Documentation
-- [SDK Documentation](./packages/fhevm-sdk/README.md)
-- [Next.js Template Guide](./examples/nextjs-demo/README.md)
-- [Architecture Overview](./ARCHITECTURE.md)
+- [Quick Start Guide](./docs/QUICK_START.md) - Get started in 5 minutes
+- [API Reference](./docs/API.md) - Complete API documentation
+- [SDK Documentation](./packages/fhevm-sdk/README.md) - Core SDK details
+- [Next.js Template Guide](./examples/nextjs-demo/README.md) - React integration guide
+- [Architecture Overview](./ARCHITECTURE.md) - System design and architecture
 
 
 ### Links
