@@ -23,6 +23,11 @@
 - 📦 **Modular**: Use only what you need - core SDK or with React hooks
 - 🛠️ **Production Ready**: Tested, documented, and deployed live
 
+## 🎥 Demo
+
+**Live Application**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
+
+**Video Demonstration**: demo1.mp4 demo2.mp4 demo3.mp4 
 ---
 
 ## 📦 SDK Architecture
@@ -76,11 +81,7 @@ const encrypted = await encrypt(42);
 
 This breakthrough platform allows agricultural cooperatives to collaborate on data-driven decision making while maintaining complete privacy of their proprietary farming data through advanced Fully Homomorphic Encryption (FHE) technology.
 
-## 🎥 Demo
 
-**Live Application**: [https://tyreebartoletti.github.io/FHECropYieldOptimizer/](https://tyreebartoletti.github.io/FHECropYieldOptimizer/)
-
-**Video Demonstration**: demo1.mp4 demo2.mp4 demo3.mp4 
 
 ## 🚀 Quick Start
 
