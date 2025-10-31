@@ -1,6 +1,8 @@
 # 🌾 Confidential Crop Yield Optimizer
 
 > Privacy-Preserving Agricultural Data Collaboration Platform
+>
+> **SDK Integration Available**: See [SDK_INTEGRATION_GUIDE.md](./SDK_INTEGRATION_GUIDE.md) for @fhevm/sdk integration instructions
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://tyreebartoletti.github.io/fheCropYieldOptimizer/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
